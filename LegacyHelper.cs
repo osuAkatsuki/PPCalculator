@@ -10,8 +10,7 @@ using osu.Game.Utils;
 
 using osu.Framework.Audio.Track;
 using osu.Framework.Graphics.Textures;
-
-using PPCalculator.Calculators;
+using osu.Game.Rulesets.Osu.Mods;
 
 namespace PPCalculator
 {
@@ -81,11 +80,17 @@ namespace PPCalculator
             if (mods.Any(m => m is ModDoubleTime))
                 allowedMods.Add(allMods.Single(m => m is ModNightcore).GetType());
 
+            if (mods.Any(m => m is ModRelax))
+                allowedMods.Add(allMods.Single(m => m is ModRelax).GetType());
+
+            if (mods.Any(m => m is OsuModAutopilot))
+                allowedMods.Add(allMods.Single(m => m is OsuModAutopilot).GetType());
+
             var result = new List<Mod>();
 
             var classicMod = allMods.SingleOrDefault(m => m is ModClassic);
             if (classicMod != null)
-                result.Add(classicMod);
+                 result.Add(classicMod);
 
             result.AddRange(mods.Where(m => allowedMods.Contains(m.GetType())));
 
